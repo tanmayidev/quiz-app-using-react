@@ -16,7 +16,6 @@ const Quiz = () => {
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch({ type: "LOADED_QUESTIONS", payload: data.results });
       });
   });
