@@ -2,8 +2,8 @@ import { useContext } from "react";
 import Answer from "./Answer";
 import { QuizContext } from "../contexts/quiz";
 
-const Question = ({ questions }) => {
-  const [quizState] = useContext(QuizContext);
+const Question = () => {
+  const [quizState, dispatch] = useContext(QuizContext);
   const currentQuestion = quizState.questions[quizState.currentQuestionIndex];
 
   return (
@@ -11,7 +11,16 @@ const Question = ({ questions }) => {
       <div className="question">{currentQuestion.question}</div>
       <div className="answers">
         {quizState.answers.map((answer, index) => (
-          <Answer answerText={answer} key={index} /> //not adding key gives error
+          <Answer
+            answerText={answer}
+            key={index}
+            index={index}
+            currentAnswer={quizState.currentAnswer}
+            correctAnswer={currentQuestion.correctAnswer}
+            onSelectAnswer={(answerText) =>
+              dispatch({ type: "SELECT_ANSWER", payload: answerText })
+            }
+          /> //not adding key gives error
         ))}
       </div>
     </div>
