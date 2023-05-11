@@ -1,5 +1,6 @@
-import { useReducer } from "react";
+import { useReducer, useContext } from "react";
 import Question from "./Question";
+import { QuizContext } from "../contexts/quiz";
 
 const initialState = {
   currentQuestionIndex: 0,
@@ -17,6 +18,9 @@ const reducer = (state, action) => {
 };
 
 const Quiz = () => {
+  // quiz context - allows you to access values in QuizContext
+  const quizState = useContext(QuizContext);
+  console.log("quizState", quizState);
   // not using useState to maintain business logic outside the component and to reduce the number of useStates used
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
