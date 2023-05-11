@@ -24,3 +24,16 @@ Finally, the function maps over the sorted array of objects and returns an array
 
 Overall, this code generates a random order for the correctAnswer and incorrectAnswers array and returns them in a shuffled order.
  */
+
+export const normalizeQuestions = (backendQuestions) => {
+  return backendQuestions.map((backendQuestion) => {
+    const incorrectAnswers = backendQuestion.incorrect_answers.map(
+      (incorrectAnswer) => decodeURIComponent(incorrectAnswer)
+    );
+    return {
+      correctAnswer: decodeURIComponent(backendQuestion.correct_answer),
+      question: decodeURIComponent(backendQuestion.question),
+      incorrectAnswers,
+    };
+  });
+};
